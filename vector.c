@@ -13,3 +13,4 @@ t_vec3	*create_vector(double x, double y, double z)
 	vector->z = z;
 	return (vector);
 }
+

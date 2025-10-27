@@ -12,6 +12,7 @@ t_camera	*create_camera(t_point3 *location, t_vec3 *direction, double aspect_rat
 	camera->direction = direction;
 	camera->fov = fov;
 	camera->location = location;
+	return (camera);
 }
 
 t_camera	*init_camera()
@@ -27,4 +28,5 @@ t_camera	*init_camera()
 	if (!location)
 		return (free(direction), NULL);
 	camera = create_camera(location, direction, ASPECT_RATIO, FOV);
+	return (camera);
 }

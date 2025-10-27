@@ -1,3 +1,5 @@
 .vscode
 minirt
 minilibx-linux/
+*.o
+minirt_test

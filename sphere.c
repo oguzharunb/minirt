@@ -9,7 +9,7 @@ t_sphere	*create_sphere(double radius, double x, double y, double z)
 	sphere = malloc(sizeof(t_sphere));
 	if (!sphere)
 		return (NULL);
-	center = create_point(x, y, z);
+	center = create_vector(x, y, z);
 	if (!center)
 	{
 		free(sphere);

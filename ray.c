@@ -1,4 +1,3 @@
-#include "vector.h"
 #include "ray.h"
 #include <stdlib.h>
 

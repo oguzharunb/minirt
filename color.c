@@ -6,7 +6,7 @@
 
 
 //variant: r for red, g for green, b for blue, t for transparency
-int	get_prim_color(t_color color, char variant)
+unsigned int	get_prim_color(t_color color, char variant)
 {
 	int	coef;
 
@@ -14,15 +14,15 @@ int	get_prim_color(t_color color, char variant)
 	if (variant == 'g')
 		coef -= 010;
 	else if (variant == 'b')
-		coef -= 010;
+		coef -= 020;
 	else if (variant == 't')
-		coef -= 010;
-	color = (color << (030 - coef)) >> 020;
+		coef -= 030;
+	color = (color << (030 - coef)) >> 030;
 	return (color);
 }
 
 //variant: r for red, g for green, b for blue, t for transparency
-void set_prim_color(t_color *color, int prim_color, char variant)
+void set_prim_color(t_color *color, unsigned int prim_color, char variant)
 {
 	int	mask;
 	int	coef;
@@ -37,12 +37,12 @@ void set_prim_color(t_color *color, int prim_color, char variant)
 	else if (variant == 'b')
 	{
 		coef = 010;
-		mask -= 0xffff00ff;
+		mask = 0xffff00ff;
 	}
 	else if (variant == 't')
 	{
 		coef = 00;
-		mask -= 0xffffff00;
+		mask = 0xffffff00;
 	}
 	prim_color = prim_color << coef;
 	*color = (*color) & mask;

@@ -12,12 +12,12 @@ t_point3	*ray_at(t_ray *ray, double t)
 	scaled_vec = scale_vector(ray->vec, t);
 	if (!scaled_vec)
 		return (NULL);
-	p = join_vector(scaled_vec, ray->point);
+	p = vector_sum(scaled_vec, ray->point);
 	if (!p)
 	{
 		free(scaled_vec);
 		return (NULL);
 	}
 	free(scaled_vec);
-	return (scaled_vec);
+	return (p);
 }

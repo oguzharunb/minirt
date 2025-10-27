@@ -25,7 +25,7 @@ int main(void)
     void    	*win;
 	t_data		img;
 	t_camera	*camera;
-
+	t_sphere	*sphere;
 
     mlx = mlx_init();
     win = mlx_new_window(mlx, WIDTH, HEIGHT, "Merhaba MiniLibX!");
@@ -34,6 +34,7 @@ int main(void)
 								&img.endian);
 	//my_mlx_pixel_put(&img, 0, 0, 0xFFFFFFFF);
 	camera = init_camera();
+	//sphere = create_sphere(1.0, 0.0, 0.0, 0.0);
 
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
     mlx_loop(mlx);

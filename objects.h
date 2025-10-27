@@ -1,3 +1,6 @@
+#ifndef OBJECTS_H
+# define OBJECTS_H
+
 #include "vector.h"
 
 typedef struct s_sphere {
@@ -7,3 +10,5 @@ typedef struct s_sphere {
 
 
 t_sphere	*create_sphere(double radius, double x, double y, double z);
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef CAMERA_H
+# define CAMERA_H
+
 #include "vector.h"
 
 #define CAMERA_POS_X 12
@@ -17,3 +20,5 @@ typedef struct	s_camera {
 }	t_camera;
 
 t_camera	*init_camera();
+
+#endif

@@ -1,0 +1,50 @@
+#include "color.h"
+
+//0000000
+//64 bit
+//first 32bit
+
+
+//variant: r for red, g for green, b for blue, t for transparency
+int	get_prim_color(t_color color, char variant)
+{
+	int	coef;
+
+	coef = 030;
+	if (variant == 'g')
+		coef -= 010;
+	else if (variant == 'b')
+		coef -= 010;
+	else if (variant == 't')
+		coef -= 010;
+	color = (color << (030 - coef)) >> 020;
+	return (color);
+}
+
+//variant: r for red, g for green, b for blue, t for transparency
+void set_prim_color(t_color *color, int prim_color, char variant)
+{
+	int	mask;
+	int	coef;
+
+	coef = 030;
+	mask = 0x00ffffff;
+	if (variant == 'g')
+	{
+		coef = 020;
+		mask = 0xff00ffff;
+	}
+	else if (variant == 'b')
+	{
+		coef = 010;
+		mask -= 0xffff00ff;
+	}
+	else if (variant == 't')
+	{
+		coef = 00;
+		mask -= 0xffffff00;
+	}
+	prim_color = prim_color << coef;
+	*color = (*color) & mask;
+	*color = (*color) | prim_color;
+}

@@ -9,6 +9,7 @@
 #define CAMERA_DIR_X -1
 #define CAMERA_DIR_Y 0
 #define CAMERA_DIR_Z 0
+
 #define ASPECT_RATIO 16.0 / 9.0
 #define FOV 70
 

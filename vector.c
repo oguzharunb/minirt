@@ -5,7 +5,7 @@ t_vec3	*create_vector(double x, double y, double z)
 {
 	t_vec3	*vector;
 
-	vector = malloc(sizeof(vector));
+	vector = malloc(sizeof(t_vec3));
 	if (!vector)
 		return (NULL);
 	vector->x = x;

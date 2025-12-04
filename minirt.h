@@ -3,8 +3,8 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define SCREEN_WIDTH 160
-# define SCREEN_HEIGHT 90
+# define SCREEN_WIDTH 1600
+# define SCREEN_HEIGHT 900
 typedef struct s_data
 {
 	void *img;          // mlx_new_image tarafından döndürülen işaretçi

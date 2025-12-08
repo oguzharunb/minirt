@@ -9,12 +9,12 @@ TEST_OBJS = $(SRCS:.c=.o) test.o
 
 # ⚙️ Derleyici ve bayraklar
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c99
 
-# 🧱 MiniLibX ayarları
-MLX_DIR = minilibx-linux
-MLX = $(MLX_DIR)/libmlx_Linux.a
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+# 🧱 MiniLibX ayarları (macOS)
+MLX_DIR = minilibx
+MLX = $(MLX_DIR)/libmlx.a
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 # 🎯 Varsayılan hedef
 all: $(NAME)

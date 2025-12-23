@@ -1,113 +1,101 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/23 17:24:23 by msengul           #+#    #+#             */
+/*   Updated: 2025/12/23 17:41:58 by msengul          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
-#include "objects.h"
-#include <stdio.h>
 #include <stdlib.h>
 
-static void free_tokens(char **tokens)
+void	free_split(char **split)
 {
-    int i = 0;
-    if (!tokens)
-        return;
-    while (tokens[i])
-        free(tokens[i++]);
-    free(tokens);
+	int	i;
+
+	i = 0;
+	if (!split)
+		return ;
+	while (split[i])
+		free(split[i++]);
+	free(split);
 }
 
-double ft_atof(char *str)
+double	ft_atof(char *str)
 {
-    double  res;
-    double  factor;
-    int     sign;
-    int     i;
+	double	res;
+	double	factor;
+	int		sign;
+	int		i;
 
-    res = 0.0;
-    factor = 1.0;
-    sign = 1;
-    i = 0;
-    if (!str)
-        return (0.0);
-    if (str[i] == '-')
-    {
-        sign = -1;
-        i++;
-    }
-    while (str[i] >= '0' && str[i] <= '9')
-        res = res * 10 + (str[i++] - '0');
-    if (str[i] == '.')
-    {
-        i++;
-        while (str[i] >= '0' && str[i] <= '9')
-        {
-            res = res * 10 + (str[i++] - '0');
-            factor *= 10.0;
-        }
-    }
-    return (res / factor * sign);
+	res = 0.0;
+	factor = 1.0;
+	sign = 1;
+	i = 0;
+	if (!str)
+		return (0.0);
+	if (str[i] == '-' && ++i)
+		sign = -1;
+	while (str[i] >= '0' && str[i] <= '9')
+		res = res * 10 + (str[i++] - '0');
+	if (str[i] == '.')
+	{
+		i++;
+		while (str[i] >= '0' && str[i] <= '9')
+		{
+			res = res * 10 + (str[i++] - '0');
+			factor *= 10.0;
+		}
+	}
+	return (res / factor * sign);
 }
 
-t_vec3 parse_vec3(char *str)
+t_vec3	parse_vec3(char *str, t_scene *scene)
 {
-    t_vec3  vec;
-    char    **tokens;
+	t_vec3	vec;
+	char	**split;
 
-    tokens = ft_split(str, ',');
-    if (!tokens || !tokens[0] || !tokens[1] || !tokens[2])
-    {
-        free_tokens(tokens);
-        printf("Error\nInvalid vector format\n");
-        exit(1);
-    }
-    vec.x = ft_atof(tokens[0]);
-    vec.y = ft_atof(tokens[1]);
-    vec.z = ft_atof(tokens[2]);
-    
-    free_tokens(tokens);
-    return (vec);
+	split = ft_split(str, ',');
+	if (!split || !split[0] || !split[1] || !split[2])
+	{
+		free_split(split);
+		exit_error("Invalid vector format", scene);
+	}
+	vec.x = ft_atof(split[0]);
+	vec.y = ft_atof(split[1]);
+	vec.z = ft_atof(split[2]);
+	free_split(split);
+	return (vec);
 }
 
-// GÜNCELLENEN KISIM: t_rgb döndürüyor
-t_rgb parse_color(char *str)
+t_rgb	parse_rgb(char *str, t_scene *scene)
 {
-    t_rgb   color;
-    char    **tokens;
-    int     r, g, b;
+	t_rgb	c;
+	char	**split;
 
-    tokens = ft_split(str, ',');
-    if (!tokens || !tokens[0] || !tokens[1] || !tokens[2])
-    {
-        free_tokens(tokens);
-        printf("Error\nInvalid color format\n");
-        exit(1);
-    }
-    
-    r = ft_atoi(tokens[0]);
-    g = ft_atoi(tokens[1]);
-    b = ft_atoi(tokens[2]);
-
-    free_tokens(tokens);
-
-    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-    {
-        printf("Error\nColor values must be in [0-255]\n");
-        exit(1);
-    }
-    color.r = r;
-    color.g = g;
-    color.b = b;
-
-    return (color);
+	split = ft_split(str, ',');
+	if (!split || !split[0] || !split[1] || !split[2])
+	{
+		free_split(split);
+		exit_error("Invalid color format", scene);
+	}
+	c.r = ft_atoi(split[0]);
+	c.g = ft_atoi(split[1]);
+	c.b = ft_atoi(split[2]);
+	free_split(split);
+	if (c.r < 0 || c.r > 255 || c.g < 0 || c.g > 255 || c.b < 0 || c.b > 255)
+		exit_error("Color values must be in [0-255]", scene);
+	return (c);
 }
 
-void exit_error(char *msg, t_scene *scene)
+int	skip_whitespace(char *line, int i)
 {
-    (void)scene;
-    printf("Error\n%s\n", msg);
-    exit(1);
-}
-
-int skip_whitespace(char *line, int i)
-{
-    while (line[i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\n' || line[i] == '\r'))
-        i++;
-    return (i);
+	while (line[i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\n'
+			|| line[i] == '\r'))
+		i++;
+	return (i);
 }

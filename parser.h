@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:23:52 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/23 17:23:53 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/23 18:12:20 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void	parse_camera(char *line, t_scene *scene);
 void	parse_light(char *line, t_scene *scene);
 
 /* parser_objs.c */
+void	sphere_add_back(t_sphere **lst, t_sphere *new);
+void	plane_add_back(t_plane **lst, t_plane *new);
+void	cylinder_add_back(t_cylinder **lst, t_cylinder *new);
 void	parse_sphere(char *line, t_scene *scene);
 void	parse_plane(char *line, t_scene *scene);
 void	parse_cylinder(char *line, t_scene *scene);

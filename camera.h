@@ -1,25 +1,30 @@
 #ifndef CAMERA_H
 # define CAMERA_H
 
-#include "vector.h"
+# include "vector.h"
 
-#define CAMERA_POS_X 12
-#define CAMERA_POS_Y 0
-#define CAMERA_POS_Z 0
-#define CAMERA_DIR_X -1
-#define CAMERA_DIR_Y 0
-#define CAMERA_DIR_Z 0
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
+# define CAMERA_POS_X  12.0
+# define CAMERA_POS_Y  -10.0
+# define CAMERA_POS_Z  -5.0
 
-#define ASPECT_RATIO 16.0 / 9.0
-#define FOV 70
+# define ASPECT_RATIO  (16.0 / 9.0)
+# define FOV           80.0
 
-typedef struct	s_camera {
-	t_point3	*location;
-	t_vec3		*direction;
-	double		aspect_ratio;
-	double		fov; //[0-180] degree
-}	t_camera;
+typedef struct s_camera {
+    t_vec3  origin;
+    t_vec3  forward;
+    t_vec3  right;
+    t_vec3  up;
 
-t_camera	*init_camera();
+    double  viewport_w;
+    double  viewport_h;
+
+    t_vec3  horizontal;
+    t_vec3  vertical;
+    t_vec3  lower_left;
+}   t_camera;
 
 #endif

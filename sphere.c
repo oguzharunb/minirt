@@ -1,50 +1,56 @@
 #include "objects.h"
 #include "ray.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
-t_sphere	*create_sphere(double radius, double x, double y, double z)
+/*eski sphere*/
+// int	hit_sphere(t_sphere *s, t_ray *ray)
+// {
+// 	t_vec3	oc;
+// 	double	a;
+// 	double	half_b;
+// 	double	c;
+// 	double	discriminant;
+
+// 	oc = vec_sub(ray->origin, s->center);
+// 	a = vec_dot(ray->direction, ray->direction);
+// 	half_b = vec_dot(oc, ray->direction);
+// 	c = vec_dot(oc, oc) - s->radius * s->radius;
+// 	discriminant = half_b * half_b - a * c;
+// 	return (discriminant >= 0);
+// }
+
+
+int hit_sphere(t_sphere *s, t_ray *ray, double *t)
 {
-	t_sphere	*sphere;
-	t_point3	*center;
+    const double    EPSILON = 1e-4;
+    t_vec3  oc;
+    double  a;
+    double  half_b;
+    double  c;
+    double  discriminant;
+    double  sqrt_d;
+    double  root;
 
-	sphere = malloc(sizeof(t_sphere));
-	if (!sphere)
-		return (NULL);
-	center = create_vector(x, y, z);
-	if (!center)
-	{
-		free(sphere);
-		return (NULL);
-	}
-	sphere->center = center;
-	sphere->radius = radius;
-	return (sphere);
-}
+    oc = vec_sub(ray->origin, s->center);
+    a = vec_dot(ray->direction, ray->direction);
+    if (fabs(a) < 1e-12)
+        return (0);
+    half_b = vec_dot (oc, ray->direction);
+    c = vec_dot(oc, oc) - s->radius * s->radius;
+    discriminant = half_b * half_b - a * c;
+    if (discriminant < 0)
+        return (0);
 
-int	hit_sphere(t_sphere *sphere, t_ray *ray)
-{
-	t_vec3 *oc;
-	double a;
-	double b;
-	double c;
-	double discriminant;
+    sqrt_d = sqrt(discriminant);
 
-	oc = vector_subtract(ray->point, sphere->center);
-	if (!oc)
-		return (-1);
-	a = dot_product2(ray->vec, ray->vec);
-	b = -2.0 * dot_product2(ray->vec, oc);
-	c = dot_product2(oc, oc) - sphere->radius * sphere->radius;
-	discriminant = b * b - 4 * a * c;
-	/*printf("ray->vec->x: %f, ray->vec->y: %f, ray->vec->z: %f\n", ray->vec->x,
-		ray->vec->y, ray->vec->z);
-	printf("sphere->center->x: %f, sphere->center->y: %f, sphere->center->z: \
-		%f\n",
-			sphere->center->x,
-			sphere->center->y,
-			sphere->center->z);
-	printf("oc->x: %f, oc->y: %f, oc->z: %f\n", oc->x, oc->y, oc->z);
-	printf("a: %f, b: %f, c: %f, discriminant: %f\n", a, b, c, discriminant);*/
-	return (discriminant >= 0);
+    root = (-half_b - sqrt_d) / a;
+    if (root <= EPSILON)
+    {
+        root = (-half_b + sqrt_d) / a;
+        if (root <= EPSILON)
+            return (0);
+    }
+    *t = root;
+    return (1);
 }

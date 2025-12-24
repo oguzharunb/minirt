@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:19:27 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/24 00:51:28 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/24 11:48:14 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,10 +172,13 @@ static int	shade_pixel(t_scene *scene, t_ray *ray)
 	t_vec3		p;
 	t_vec3		n;
 	int			col_int;
-	int			shadow;
+	//int			shadow;
 	t_sphere	*sp;
 	t_plane		*pl;
 	t_cylinder	*cy;
+	t_shade 	s;
+
+	
 
 	if (!scene_closest_hit(scene, ray, &hit))
 		return (0x87CEEB);
@@ -199,9 +202,18 @@ static int	shade_pixel(t_scene *scene, t_ray *ray)
 		col_int = rgb_to_int(cy->color);
 	}
 	orient_normal_against_ray(&n, ray);
-	shadow = is_in_shadow_scene(scene, p, n, scene->light.position);
-	return (lambert_shade(col_int, p, n, scene->light.position,
-			scene->amb.ratio, shadow ? 0.0 : scene->light.ratio));
+	s.p = p;
+	s.n = n;
+	s.light_pos = scene->light.position;
+	s.ambient = scene->amb.ratio;
+	s.intensity = scene->light.ratio;
+	if (is_in_shadow_scene(scene, p, n, scene->light.position))
+		s.intensity = 0.0;
+	
+	return (lambert_shade(col_int, s));
+	// shadow = is_in_shadow_scene(scene, p, n, scene->light.position);
+	// return (lambert_shade(col_int, p, n, scene->light.position,
+	// 		scene->amb.ratio, shadow ? 0.0 : scene->light.ratio));
 }
 
 void	render(t_data *img, t_scene *scene)

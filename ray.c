@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/23 16:26:19 by msengul           #+#    #+#             */
+/*   Updated: 2025/12/23 16:26:20 by msengul          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "camera.h"
 #include "minirt.h"
 #include "ray.h"
@@ -21,11 +33,4 @@ t_ray	*set_ray(t_ray *ray, t_camera *cam, int i, int j)
 	ray->origin = cam->origin;
 	ray->direction = vec_normalize(vec_sub(p, cam->origin));
 	return (ray);
-}
-
-void print_ray(t_ray *ray)
-{
-    printf("origin: %.2f, %.2f, %.2f | dir: %.2f, %.2f, %.2f\n",
-        ray->origin.x, ray->origin.y, ray->origin.z,
-        ray->direction.x, ray->direction.y, ray->direction.z);
 }

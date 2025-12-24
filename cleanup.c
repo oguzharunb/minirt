@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:05:14 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/23 17:06:51 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/24 00:47:39 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,9 @@
 
 void	free_objects(t_scene *scene)
 {
-	t_sphere	*sp;
-	t_plane		*pl;
-	t_cylinder	*cy;
-	void		*tmp;
-
-	sp = scene->spheres;
-	while (sp)
-	{
-		tmp = sp->next;
-		free(sp);
-		sp = tmp;
-	}
-	pl = scene->planes;
-	while (pl)
-	{
-		tmp = pl->next;
-		free(pl);
-		pl = tmp;
-	}
-	cy = scene->cylinders;
-	while (cy)
-	{
-		tmp = cy->next;
-		free(cy);
-		cy = tmp;
-	}
+	free_spheres(scene->spheres);
+	free_planes(scene->planes);
+	free_cylinders(scene->cylinders);
 }
 
 void	free_scene(t_scene *scene)

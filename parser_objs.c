@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:26:24 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/23 17:28:56 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/23 18:17:13 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	parse_sphere(char *line, t_scene *scene)
 {
 	t_sphere	*sp;
 	char		**split;
-	t_sphere	*tmp;
 
 	sp = malloc(sizeof(t_sphere));
 	if (!sp)
@@ -34,22 +33,13 @@ void	parse_sphere(char *line, t_scene *scene)
 	sp->color = parse_rgb(split[3], scene);
 	sp->next = NULL;
 	free_split(split);
-	if (!scene->spheres)
-		scene->spheres = sp;
-	else
-	{
-		tmp = scene->spheres;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = sp;
-	}
+	sphere_add_back(&scene->spheres, sp);
 }
 
 void	parse_plane(char *line, t_scene *scene)
 {
 	t_plane	*pl;
 	char	**split;
-	t_plane	*tmp;
 
 	pl = malloc(sizeof(t_plane));
 	if (!pl)
@@ -66,22 +56,13 @@ void	parse_plane(char *line, t_scene *scene)
 	pl->color = parse_rgb(split[3], scene);
 	pl->next = NULL;
 	free_split(split);
-	if (!scene->planes)
-		scene->planes = pl;
-	else
-	{
-		tmp = scene->planes;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = pl;
-	}
+	plane_add_back(&scene->planes, pl);
 }
 
 void	parse_cylinder(char *line, t_scene *scene)
 {
 	t_cylinder	*cy;
 	char		**split;
-	t_cylinder	*tmp;
 
 	cy = malloc(sizeof(t_cylinder));
 	if (!cy)
@@ -100,13 +81,5 @@ void	parse_cylinder(char *line, t_scene *scene)
 	cy->color = parse_rgb(split[5], scene);
 	cy->next = NULL;
 	free_split(split);
-	if (!scene->cylinders)
-		scene->cylinders = cy;
-	else
-	{
-		tmp = scene->cylinders;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = cy;
-	}
+	cylinder_add_back(&scene->cylinders, cy);
 }

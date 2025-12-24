@@ -6,12 +6,14 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:24:51 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/23 17:25:08 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/24 00:49:58 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <math.h>
+
+#define ASPECT_RATIO (16.0 / 9.0)
 
 static void	setup_camera(t_camera *cam, double fov_deg)
 {

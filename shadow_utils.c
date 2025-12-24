@@ -1,7 +1,17 @@
-#include "shadow_utils.h"
-#include "ray.h"
-#include <math.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shadow_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/23 16:28:18 by msengul           #+#    #+#             */
+/*   Updated: 2025/12/23 16:29:49 by msengul          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "ray.h"
+#include "shadow_utils.h"
 
 int	is_in_shadow(t_vec3 p, t_vec3 n, t_vec3 light_pos, t_scene_objs *objs)
 {

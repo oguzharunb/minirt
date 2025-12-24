@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_utils.h                                        :+:      :+:    :+:   */
+/*   vector_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/24 00:48:52 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/24 00:48:53 by msengul          ###   ########.fr       */
+/*   Created: 2025/12/23 16:53:56 by msengul           #+#    #+#             */
+/*   Updated: 2025/12/24 00:53:36 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_UTILS_H
-# define MLX_UTILS_H
+#include "vector.h"
+#include <math.h>
 
-# include "minirt.h"
+t_vec3	vec_cross(t_vec3 a, t_vec3 b)
+{
+	return (vec(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y
+			* b.x));
+}
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+double	vec_length(t_vec3 a)
+{
+	return (sqrt(vec_dot(a, a)));
+}
 
-#endif
+t_vec3	vec_normalize(t_vec3 a)
+{
+	double	len;
+
+	len = vec_length(a);
+	return (vec(a.x / len, a.y / len, a.z / len));
+}

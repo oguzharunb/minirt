@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/23 16:32:17 by msengul           #+#    #+#             */
+/*   Updated: 2025/12/23 18:26:33 by msengul          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "color.h"
 
-//0000000
-//64 bit
-//first 32bit
+// 0000000
+// 64 bit
+// first 32bit
 
-
-//variant: r for red, g for green, b for blue, t for transparency
+// variant: r for red, g for green, b for blue, t for transparency
 unsigned int	get_prim_color(t_color color, char variant)
 {
 	int	coef;
@@ -21,8 +32,8 @@ unsigned int	get_prim_color(t_color color, char variant)
 	return (color);
 }
 
-//variant: r for red, g for green, b for blue, t for transparency
-void set_prim_color(t_color *color, unsigned int prim_color, char variant)
+// variant: r for red, g for green, b for blue, t for transparency
+void	set_prim_color(t_color *color, unsigned int prim_color, char variant)
 {
 	int	mask;
 	int	coef;

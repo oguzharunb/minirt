@@ -1,6 +1,18 @@
-#include "shading_utils.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shading_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/24 00:51:41 by msengul           #+#    #+#             */
+/*   Updated: 2025/12/24 00:52:13 by msengul          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 #include "objects.h"
+#include "shading_utils.h"
 
 static int	clampi(int x, int min, int max)
 {
@@ -38,13 +50,12 @@ t_vec3	plane_normal(t_plane *pl, t_ray *ray)
 	return (pl->normal);
 }
 
-
-t_vec3 cylinder_normal(t_cylinder *cy, t_vec3 p)
+t_vec3	cylinder_normal(t_cylinder *cy, t_vec3 p)
 {
-    
-    double m = vec_dot(vec_sub(p, cy->center), cy->axis);
-    
-    t_vec3 axis_point = vec_add(cy->center, vec_mul(cy->axis, m));
-    
-    return (vec_normalize(vec_sub(p, axis_point)));
+	double	m;
+	t_vec3	axis_point;
+
+	m = vec_dot(vec_sub(p, cy->center), cy->axis);
+	axis_point = vec_add(cy->center, vec_mul(cy->axis, m));
+	return (vec_normalize(vec_sub(p, axis_point)));
 }

@@ -1,23 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/23 17:06:32 by msengul           #+#    #+#             */
+/*   Updated: 2025/12/24 00:55:30 by msengul          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
-
-#define SCALE 4
+# define SCALE 5
 # define SCREEN_WIDTH 320
 # define SCREEN_HEIGHT 180
+
+# ifdef __linux__
+#  include <X11/keysym.h>
+#  define KEY_ESC XK_Escape
+#  define KEY_W XK_w
+#  define KEY_A XK_a
+#  define KEY_S XK_s
+#  define KEY_D XK_d
+#  define KEY_LEFT XK_Right
+#  define KEY_RIGHT XK_Left
+#  define KEY_UP XK_Down
+#  define KEY_DOWN XK_Up
+# endif
+
+# define MOVE_STEP 0.35
+# define ROT_STEP 0.0523598 // ~3 derece radyan
+
 # include "camera.h"
 # include "objects.h"
 
 typedef struct s_data
 {
-	void *img;
-	char *addr;
-	int bits_per_pixel;
-	int line_length;
-	int endian;
-}		t_data;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_data;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void render(t_data *img, t_scene *scene);
+typedef struct s_app
+{
+	void	*mlx;
+	void	*win;
+	t_data	img;
+	t_scene	scene;
+}			t_app;
 
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		render(t_data *img, t_scene *scene);
+void		redraw(t_app *app);
+
+void		free_scene(t_scene *scene);
+int			on_close(void *param);
+
+int			on_key(int key, void *param);
 #endif

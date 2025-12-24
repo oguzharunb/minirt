@@ -16,7 +16,8 @@ SRCS        = ray.c color.c render.c sphere.c vector.c plane.c \
               cylinder.c parser.c parser_utils.c vector_utils.c \
 			  cleanup.c hook.c \
 			  parser_scene.c parser_objs.c parser_objs_utils.c \
-			  free_objects.c \
+			  free_objects.c render_utils.c \
+			  intersection.c \
               $(GNL_SRCS)
 
 OBJS        = $(SRCS:.c=.o)

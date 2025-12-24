@@ -6,12 +6,21 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 12:53:10 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/24 13:07:28 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/24 15:20:24 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #define EPS 1e-4
+
+int	clampi(int x, int min, int max)
+{
+	if (x < min)
+		return (min);
+	if (x > max)
+		return (max);
+	return (x);
+}
 
 static int	clamp255(int v)
 {

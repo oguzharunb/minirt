@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 00:49:11 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/24 00:49:11 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/24 13:18:20 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,11 @@ int						hit_plane(t_plane *pl, t_ray *ray, double *t);
 void					free_spheres(t_sphere *sp);
 void					free_planes(t_plane *pl);
 void					free_cylinders(t_cylinder *cy);
+
+t_vec3					sphere_normal(t_sphere *sp, t_vec3 p);
+
+t_vec3					plane_normal(t_plane *pl);
+
+t_vec3					cylinder_normal(t_cylinder *cy, t_vec3 p);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:06:32 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/24 00:55:30 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/24 13:17:45 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 # include "camera.h"
 # include "objects.h"
+# define EPS 1e-4
 
 typedef struct s_data
 {
@@ -61,4 +62,15 @@ void		free_scene(t_scene *scene);
 int			on_close(void *param);
 
 int			on_key(int key, void *param);
+
+int			scene_closest_hit(t_scene *scene, t_ray *ray, t_hit *hit);
+
+t_vec3		get_normal(t_hit *hit, t_vec3 p);
+void		orient_normal(t_vec3 *n, t_ray *ray);
+
+int			rgb_to_int(t_rgb c);
+int			get_obj_color(t_hit *hit);
+int			is_in_shadow_scene(t_scene *scene, t_vec3 p, t_vec3 n,
+				t_vec3 l_pos);
+
 #endif

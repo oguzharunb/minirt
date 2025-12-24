@@ -6,14 +6,14 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:06:32 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/24 13:17:45 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/24 15:37:15 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define SCALE 5
+# define SCALE 4
 # define SCREEN_WIDTH 320
 # define SCREEN_HEIGHT 180
 

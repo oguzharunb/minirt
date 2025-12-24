@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:18:04 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/23 17:18:05 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/24 11:38:31 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,33 @@ int	color_scale(int rgb, double k)
 	return ((r << 16) | (g << 8) | b);
 }
 
-int	lambert_shade(int base_rgb, t_vec3 p, t_vec3 n, t_vec3 light_pos,
-		double ambient, double intensity)
+// int	lambert_shade(int base_rgb, t_vec3 p, t_vec3 n, t_vec3 light_pos,
+// 		double ambient, double intensity)
+// {
+// 	t_vec3	l;
+// 	double	diff;
+// 	double	k;
+
+// 	l = vec_normalize(vec_sub(light_pos, p));
+// 	diff = vec_dot(n, l);
+// 	if (diff < 0.0)
+// 		diff = 0.0;
+// 	k = ambient + intensity * diff;
+// 	k = clamp01(k);
+// 	return (color_scale(base_rgb, k));
+// }
+
+int	lambert_shade(int base_rgb, t_shade s)
 {
 	t_vec3	l;
 	double	diff;
 	double	k;
 
-	l = vec_normalize(vec_sub(light_pos, p));
-	diff = vec_dot(n, l);
+	l = vec_normalize(vec_sub(s.light_pos, s.p));
+	diff = vec_dot(s.n, l);
 	if (diff < 0.0)
 		diff = 0.0;
-	k = ambient + intensity * diff;
+	k = s.ambient + s.intensity * diff;
 	k = clamp01(k);
 	return (color_scale(base_rgb, k));
 }

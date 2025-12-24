@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:19:27 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/24 15:24:01 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/24 15:36:18 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	render(t_data *img, t_scene *scene)
 	while (y < scene->render_height)
 	{
 		x = 0;
-		while (x < scene->render_height)
+		while (x < scene->render_width)
 		{
 			set_ray(&ray, &scene->camera, x, y);
 			color = shade_pixel(scene, &ray);

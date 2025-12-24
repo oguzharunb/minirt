@@ -53,6 +53,10 @@ static void	handle_move(int key, t_camera *cam, int *changed)
 		cam->origin = vec_add(cam->origin, vec_mul(cam->right, MOVE_STEP));
 	else if (key == KEY_A)
 		cam->origin = vec_sub(cam->origin, vec_mul(cam->right, MOVE_STEP));
+	else if (key == KEY_SPACE)
+		cam->origin = vec_add(cam->origin, vec_mul(cam->up, MOVE_STEP));
+	else if (key == KEY_SHIFT)
+		cam->origin = vec_sub(cam->origin, vec_mul(cam->up, MOVE_STEP));
 	else
 		return ;
 	*changed = 1;

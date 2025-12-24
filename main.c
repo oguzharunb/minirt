@@ -39,8 +39,6 @@ static void	setup_scene_render(t_app *app, char *filename)
 {
 	init_scene(&app->scene);
 	read_rt_file(filename, &app->scene);
-	app->scene.win_width = 1920;
-	app->scene.win_height = 1080;
 	app->scene.render_width = SCREEN_WIDTH;
 	app->scene.render_height = SCREEN_HEIGHT;
 	app->scene.aspect_ratio = (double)SCREEN_WIDTH / (double)SCREEN_HEIGHT;

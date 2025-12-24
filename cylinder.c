@@ -27,29 +27,6 @@ typedef struct s_cy_vars
 	double	min_t;
 }			t_cy_vars;
 
-int	hit_disk(t_ray *ray, t_plane pl, double radius, double *t)
-{
-	double	denom;
-	double	t_temp;
-	t_vec3	p;
-	t_vec3	v;
-
-	denom = vec_dot(ray->direction, pl.normal);
-	if (fabs(denom) < 1e-6)
-		return (0);
-	t_temp = vec_dot(vec_sub(pl.point, ray->origin), pl.normal) / denom;
-	if (t_temp < 1e-4)
-		return (0);
-	p = vec_add(ray->origin, vec_mul(ray->direction, t_temp));
-	v = vec_sub(p, pl.point);
-	if (vec_dot(v, v) <= radius * radius)
-	{
-		*t = t_temp;
-		return (1);
-	}
-	return (0);
-}
-
 static void	check_body_hit(t_cylinder *cy, t_ray *ray, t_cy_vars *v)
 {
 	double	dot_r_ax;
@@ -77,28 +54,6 @@ static void	check_body_hit(t_cylinder *cy, t_ray *ray, t_cy_vars *v)
 	}
 }
 
-static void	check_caps_hit(t_cylinder *cy, t_ray *ray, double *min_t)
-{
-	t_plane	cap;
-	double	t_cap;
-
-	t_cap = 0;
-	cap.point = vec_add(cy->center, vec_mul(cy->axis, cy->height / 2.0));
-	cap.normal = cy->axis;
-	if (hit_disk(ray, cap, cy->radius, &t_cap))
-	{
-		if (t_cap < *min_t)
-			*min_t = t_cap;
-	}
-	cap.point = vec_sub(cy->center, vec_mul(cy->axis, cy->height / 2.0));
-	cap.normal = vec_mul(cy->axis, -1.0);
-	if (hit_disk(ray, cap, cy->radius, &t_cap))
-	{
-		if (t_cap < *min_t)
-			*min_t = t_cap;
-	}
-}
-
 int	hit_cylinder(t_cylinder *cy, t_ray *ray, double *t)
 {
 	t_cy_vars	v;
@@ -106,7 +61,6 @@ int	hit_cylinder(t_cylinder *cy, t_ray *ray, double *t)
 	v.min_t = 1e30;
 	v.oc = vec_sub(ray->origin, cy->center);
 	check_body_hit(cy, ray, &v);
-	check_caps_hit(cy, ray, &v.min_t);
 	if (v.min_t < 1e30)
 	{
 		*t = v.min_t;

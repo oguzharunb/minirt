@@ -80,9 +80,6 @@ typedef struct s_light
 
 typedef struct s_scene
 {
-	int					win_width;
-	int					win_height;
-
 	int					render_width;
 	int					render_height;
 

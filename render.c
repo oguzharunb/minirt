@@ -6,12 +6,13 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:19:27 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/24 15:36:18 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 13:06:43 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lighting_utils.h"
 #include "minirt.h"
+#include "mlx.h"
 #include "mlx_utils.h"
 #include "objects.h"
 #include "ray.h"
@@ -19,12 +20,11 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "mlx.h"
 
-static void put_block(t_data *img, int sx, int sy, int color, int scale)
+static void	put_block(t_data *img, int sx, int sy, int color, int scale)
 {
-	int dx;
-	int dy;
+	int	dx;
+	int	dy;
 
 	dy = 0;
 	while (dy < scale)
@@ -63,14 +63,14 @@ static int	shade_pixel(t_scene *scene, t_ray *ray)
 	return (lambert_shade(col, s));
 }
 
-void render(t_app *app)
+void	render(t_app *app)
 {
-	int     x;
-	int     y;
-	int     color;
-	t_ray   ray;
-	t_scene *scene;
-	t_data  *img;
+	int		x;
+	int		y;
+	int		color;
+	t_ray	ray;
+	t_scene	*scene;
+	t_data	*img;
 
 	scene = &app->scene;
 	img = &app->img;
@@ -80,9 +80,11 @@ void render(t_app *app)
 		x = 0;
 		while (x < scene->render_width)
 		{
-			set_ray(&ray, &scene->camera, x, y, scene->render_width, scene->render_height);
+			set_ray(&ray, &scene->camera, x, y, scene->render_width,
+				scene->render_height);
 			color = shade_pixel(scene, &ray);
-			put_block(img, x * scene->scale, y * scene->scale, color, scene->scale);
+			put_block(img, x * scene->scale, y * scene->scale, color,
+				scene->scale);
 			x++;
 		}
 		mlx_put_image_to_window(app->mlx, app->win, img->img, 0, 0);

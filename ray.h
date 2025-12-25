@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 16:26:21 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/23 16:26:22 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 13:07:23 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_ray
 }			t_ray;
 
 t_vec3		ray_at(t_ray *ray, double t);
-void set_ray(t_ray *ray, t_camera *cam, double x, double y, int width, int height);
+void		set_ray(t_ray *ray, t_camera *cam, double x, double y, int width,
+				int height);
 
 #endif

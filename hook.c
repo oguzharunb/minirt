@@ -6,31 +6,31 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:08:30 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/23 17:10:14 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 13:09:30 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <math.h>
 
-static void switch_to_low_res(t_scene *scene)
+static void	switch_to_low_res(t_scene *scene)
 {
-    if (scene->scale != 10)
-    {
-        scene->scale = 10;
-        scene->render_width = WIN_WIDTH / 10;   // 160
-        scene->render_height = WIN_HEIGHT / 10; // 90
-    }
+	if (scene->scale != 10)
+	{
+		scene->scale = 10;
+		scene->render_width = WIN_WIDTH / 10;
+		scene->render_height = WIN_HEIGHT / 10;
+	}
 }
 
-static void switch_to_high_res(t_scene *scene)
+static void	switch_to_high_res(t_scene *scene)
 {
-    if (scene->scale != 1)
-    {
-        scene->scale = 1;
-        scene->render_width = WIN_WIDTH;   // 1600
-        scene->render_height = WIN_HEIGHT; // 900
-    }
+	if (scene->scale != 1)
+	{
+		scene->scale = 1;
+		scene->render_width = WIN_WIDTH;
+		scene->render_height = WIN_HEIGHT;
+	}
 }
 
 static t_vec3	rot_axis(t_vec3 v, t_vec3 axis, double ang)
@@ -63,28 +63,27 @@ static void	cam_rebuild(t_camera *cam)
 	cam->lower_left = vec_add(cam->lower_left, cam->forward);
 }
 
-static void handle_move(int key, t_camera *cam, int *changed)
+static void	handle_move(int key, t_camera *cam, int *changed)
 {
-    // Hareket tuşları...
-    if (key == KEY_W || key == KEY_S || key == KEY_D || 
-        key == KEY_A || key == KEY_SPACE || key == KEY_SHIFT)
-    {
-        // Hareket varsa changed'i işaretle
-        // Not: Burada henüz scale değiştirmiyoruz, on_key içinde yapacağız
-        if (key == KEY_W)
-            cam->origin = vec_add(cam->origin, vec_mul(cam->forward, MOVE_STEP));
-        else if (key == KEY_S)
-            cam->origin = vec_sub(cam->origin, vec_mul(cam->forward, MOVE_STEP));
-        else if (key == KEY_D)
-            cam->origin = vec_add(cam->origin, vec_mul(cam->right, MOVE_STEP));
-        else if (key == KEY_A)
-            cam->origin = vec_sub(cam->origin, vec_mul(cam->right, MOVE_STEP));
-        else if (key == KEY_SPACE)
-            cam->origin = vec_add(cam->origin, vec_mul(cam->up, MOVE_STEP));
-        else if (key == KEY_SHIFT)
-            cam->origin = vec_sub(cam->origin, vec_mul(cam->up, MOVE_STEP));
-        *changed = 1;
-    }
+	if (key == KEY_W || key == KEY_S || key == KEY_D || key == KEY_A
+		|| key == KEY_SPACE || key == KEY_SHIFT)
+	{
+		if (key == KEY_W)
+			cam->origin = vec_add(cam->origin, vec_mul(cam->forward,
+						MOVE_STEP));
+		else if (key == KEY_S)
+			cam->origin = vec_sub(cam->origin, vec_mul(cam->forward,
+						MOVE_STEP));
+		else if (key == KEY_D)
+			cam->origin = vec_add(cam->origin, vec_mul(cam->right, MOVE_STEP));
+		else if (key == KEY_A)
+			cam->origin = vec_sub(cam->origin, vec_mul(cam->right, MOVE_STEP));
+		else if (key == KEY_SPACE)
+			cam->origin = vec_add(cam->origin, vec_mul(cam->up, MOVE_STEP));
+		else if (key == KEY_SHIFT)
+			cam->origin = vec_sub(cam->origin, vec_mul(cam->up, MOVE_STEP));
+		*changed = 1;
+	}
 }
 
 static void	handle_rotate(int key, t_camera *cam, int *changed)
@@ -108,39 +107,34 @@ static void	handle_rotate(int key, t_camera *cam, int *changed)
 		return ;
 	*changed = 1;
 }
-int on_key(int key, void *param)
+
+int	on_key(int key, void *param)
 {
-    t_app   *app;
-    int     changed;
+	t_app	*app;
+	int		changed;
 
-    app = (t_app *)param;
-    changed = 0;
-    if (key == KEY_ESC)
-        on_close(app);
-
-    // R tuşu kontrolü
-    if (key == KEY_R)
-    {
-        switch_to_high_res(&app->scene);
-        redraw(app); // Hemen yeniden çiz (Yüksek Kalite)
-        return (0);
-    }
-
-    // Hareket veya rotasyon varsa önce DÜŞÜK ÇÖZÜNÜRLÜĞE zorla
-    if (key == KEY_W || key == KEY_S || key == KEY_D || key == KEY_A ||
-        key == KEY_SPACE || key == KEY_SHIFT || key == KEY_UP ||
-        key == KEY_DOWN || key == KEY_LEFT || key == KEY_RIGHT)
-    {
-        switch_to_low_res(&app->scene); 
-    }
-
-    handle_move(key, &app->scene.camera, &changed);
-    handle_rotate(key, &app->scene.camera, &changed);
-
-    if (changed)
-    {
-        cam_rebuild(&app->scene.camera);
-        redraw(app); // Düşük kalite ile hızlı çizim
-    }
-    return (0);
+	app = (t_app *)param;
+	changed = 0;
+	if (key == KEY_ESC)
+		on_close(app);
+	if (key == KEY_R)
+	{
+		switch_to_high_res(&app->scene);
+		redraw(app);
+		return (0);
+	}
+	if (key == KEY_W || key == KEY_S || key == KEY_D || key == KEY_A
+		|| key == KEY_SPACE || key == KEY_SHIFT || key == KEY_UP
+		|| key == KEY_DOWN || key == KEY_LEFT || key == KEY_RIGHT)
+	{
+		switch_to_low_res(&app->scene);
+	}
+	handle_move(key, &app->scene.camera, &changed);
+	handle_rotate(key, &app->scene.camera, &changed);
+	if (changed)
+	{
+		cam_rebuild(&app->scene.camera);
+		redraw(app);
+	}
+	return (0);
 }

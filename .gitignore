@@ -2,3 +2,8 @@
 minirt
 *.o
 minirt_test
+miniRT
+libft/libft.a
+minilibx-linux/libmlx_Linux.a
+minilibx-linux/libmlx.a
+minilibx-linux/test/mlx-test

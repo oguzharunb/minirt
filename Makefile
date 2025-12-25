@@ -25,7 +25,7 @@ MAIN_OBJ    = main.o
 TEST_OBJ    = test.o
 
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g3
+CFLAGS      = -Wall -Wextra -Werror
 INCLUDES    = -I. -I$(LIBFT_DIR) -I$(GNL_DIR) -I$(MLX_DIR)
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 

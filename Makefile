@@ -1,4 +1,4 @@
-NAME        = minirt
+NAME        = miniRT
 TEST_NAME   = minirt_test
 
 LIBFT_DIR   = ./libft
@@ -17,7 +17,7 @@ SRCS        = ray.c color.c render.c sphere.c vector.c plane.c \
 			  cleanup.c hook.c \
 			  parser_scene.c parser_objs.c parser_objs_utils.c \
 			  free_objects.c render_utils.c \
-			  intersection.c \
+			  intersection.c hook_utils.c \
               $(GNL_SRCS)
 
 OBJS        = $(SRCS:.c=.o)
@@ -29,8 +29,7 @@ CFLAGS      = -Wall -Wextra -Werror -g3
 INCLUDES    = -I. -I$(LIBFT_DIR) -I$(GNL_DIR) -I$(MLX_DIR)
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
-# macOS MiniLibX flags
-#MLX_FLAGS   = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+
 LIBS        = -L$(LIBFT_DIR) -lft $(MLX_FLAGS)
 
 all: $(LIBFT) $(MLX) $(NAME)

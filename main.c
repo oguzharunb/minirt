@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:12:33 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/25 13:06:22 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 13:59:10 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 void	redraw(t_app *app)
 {
 	render(app);
-	// mlx_put_image_to_window(app->mlx, app->win, app->img.img, 0, 0);
 }
 
 static void	init_app_window(t_app *app)

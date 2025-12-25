@@ -6,14 +6,13 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 16:26:19 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/25 14:06:06 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 18:22:14 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 #include "minirt.h"
 #include "ray.h"
-#include <stdio.h>
 
 t_vec3	ray_at(t_ray *ray, double t)
 {

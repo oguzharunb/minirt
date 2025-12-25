@@ -6,22 +6,13 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 16:20:05 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/23 16:23:13 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 17:04:53 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 #include "ray.h"
 #include <math.h>
-
-/**
- * double_t ile bir kesisime rastladiysak nerede rasladigimizin t sini
- * fonksiyon icerisinden disariya gonderiyoruz
- * bunun sebebi;
- * -kesisim var ama hangi (t)
- * -ayni ray baska objeye de carpiyorsa hangisi daha yakin
- * -golge hesaplarken isik ile obje arasinda baska obje varmi
- */
 
 int	hit_plane(t_plane *pl, t_ray *ray, double *t)
 {

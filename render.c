@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:19:27 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/25 14:16:02 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 18:21:14 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,21 @@
 #include "objects.h"
 #include "ray.h"
 #include "vector.h"
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
 
-static void	put_block(t_data *img, int sx, int sy, int color, int scale)
+static void	put_block(t_app *app, int sx, int sy, int color)
 {
-	int	dx;
-	int	dy;
+	int		dx;
+	int		dy;
+	t_data	img;
 
+	img = app->img;
 	dy = 0;
-	while (dy < scale)
+	while (dy < app->scene.scale)
 	{
 		dx = 0;
-		while (dx < scale)
+		while (dx < app->scene.scale)
 		{
-			my_mlx_pixel_put(img, sx + dx, sy + dy, color);
+			my_mlx_pixel_put(&img, sx + dx, sy + dy, color);
 			dx++;
 		}
 		dy++;
@@ -48,7 +47,7 @@ static int	shade_pixel(t_scene *scene, t_ray *ray)
 	t_shade	s;
 
 	if (!scene_closest_hit(scene, ray, &hit))
-		return (0x87CEEB);
+		return (0x87ceeb);
 	p = ray_at(ray, hit.t);
 	n = get_normal(&hit, p);
 	col = get_obj_color(&hit);
@@ -83,8 +82,8 @@ void	render(t_app *app)
 		{
 			set_ray(&ray, &scene->camera, ray_h);
 			color = shade_pixel(scene, &ray);
-			put_block(img, ray_h.x * scene->scale, ray_h.y * scene->scale,
-				color, scene->scale);
+			put_block(app, ray_h.x * scene->scale, ray_h.y * scene->scale,
+				color);
 			ray_h.x++;
 		}
 		mlx_put_image_to_window(app->mlx, app->win, img->img, 0, 0);

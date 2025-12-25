@@ -1,4 +1,4 @@
-A 1 255,255,255
+A 0.2 255,255,255
 
 C 0,-2,-22 0,0,1 70
 
@@ -41,7 +41,7 @@ sp 6,5,10 3 218,165,32
 
 # --- ÇATI KİRİŞLERİ (Bina Hissi İçin) ---
 # Ön Kiriş (Yatay X ekseninde)
-cy 0,6.5,0 1,1,0 1.5 16 139,69,19
+cy 0,6.5,0 1,0,0 1.5 16 139,69,19
 # Arka Kiriş (Yatay X ekseninde)
 cy 0,6.5,10 1,0,0 1.5 16 139,69,19
 # Sol Kiriş (Yatay Z ekseninde)

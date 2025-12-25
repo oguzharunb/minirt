@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 00:49:11 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/25 15:29:43 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 17:02:45 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 
-# define SCALE 1
+# define SCALE 10
 # define SCREEN_WIDTH 320
 # define SCREEN_HEIGHT 180
 

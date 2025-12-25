@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 16:32:04 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/24 00:34:33 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 16:43:27 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define CAMERA_POS_Y -10.0
 # define CAMERA_POS_Z -5.0
 
-# define FOV 80.0
+# define FOV 90.0
 
 typedef struct s_camera
 {

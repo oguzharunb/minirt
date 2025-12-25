@@ -11,8 +11,8 @@ MLX         = $(MLX_DIR)/libmlx.a
 GNL_SRCS    = $(GNL_DIR)/get_next_line.c \
               $(GNL_DIR)/get_next_line_utils.c
 
-SRCS        = ray.c color.c render.c sphere.c vector.c plane.c \
-              shading_utils.c mlx_utils.c lighting_utils.c shadow_utils.c \
+SRCS        = ray.c render.c sphere.c vector.c plane.c \
+              shading_utils.c mlx_utils.c lighting_utils.c \
               cylinder.c parser.c parser_utils.c vector_utils.c \
 			  cleanup.c hook.c \
 			  parser_scene.c parser_objs.c parser_objs_utils.c \

@@ -19,6 +19,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "mlx.h"
 
 static void put_block(t_data *img, int sx, int sy, int color, int scale)
 {
@@ -62,27 +63,29 @@ static int	shade_pixel(t_scene *scene, t_ray *ray)
 	return (lambert_shade(col, s));
 }
 
-// render.c dosyasında
-void render(t_data *img, t_scene *scene)
+void render(t_app *app)
 {
-    int     x;
-    int     y;
-    int     color;
-    t_ray   ray;
+	int     x;
+	int     y;
+	int     color;
+	t_ray   ray;
+	t_scene *scene;
+	t_data  *img;
 
-    y = 0;
-    while (y < scene->render_height)
-    {
-        x = 0;
-        while (x < scene->render_width)
-        {
-            // GÜNCELLEME: scene->render_width ve height'i parametre olarak ekle
-            set_ray(&ray, &scene->camera, x, y, scene->render_width, scene->render_height);
-            
-            color = shade_pixel(scene, &ray);
-            put_block(img, x * scene->scale, y * scene->scale, color, scene->scale);
-            x++;
-        }
-        y++;
-    }
+	scene = &app->scene;
+	img = &app->img;
+	y = 0;
+	while (y < scene->render_height)
+	{
+		x = 0;
+		while (x < scene->render_width)
+		{
+			set_ray(&ray, &scene->camera, x, y, scene->render_width, scene->render_height);
+			color = shade_pixel(scene, &ray);
+			put_block(img, x * scene->scale, y * scene->scale, color, scene->scale);
+			x++;
+		}
+		mlx_put_image_to_window(app->mlx, app->win, img->img, 0, 0);
+		y++;
+	}
 }

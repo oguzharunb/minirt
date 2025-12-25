@@ -62,7 +62,7 @@ typedef struct s_app
 }			t_app;
 
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void		render(t_data *img, t_scene *scene);
+void		render(t_app *app);
 void		redraw(t_app *app);
 
 void		free_scene(t_scene *scene);

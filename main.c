@@ -20,8 +20,8 @@
 
 void	redraw(t_app *app)
 {
-	render(&app->img, &app->scene);
-	mlx_put_image_to_window(app->mlx, app->win, app->img.img, 0, 0);
+	render(app);
+	//mlx_put_image_to_window(app->mlx, app->win, app->img.img, 0, 0);
 }
 
 static void init_app_window(t_app *app)

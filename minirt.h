@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/23 17:06:32 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/25 13:29:52 by msengul          ###   ########.fr       */
+/*   Created: 2025/12/24 00:49:11 by msengul           #+#    #+#             */
+/*   Updated: 2025/12/24 13:18:20 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-// ARTIK BUNLAR SABİT PENCERE BOYUTUMUZ (1600x900)
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 
@@ -22,23 +21,22 @@
 # define SCREEN_HEIGHT 180
 
 # ifdef __linux__
-#  include <X11/keysym.h>
-#  define KEY_ESC XK_Escape
-#  define KEY_W XK_w
-#  define KEY_A XK_a
-#  define KEY_S XK_s
-#  define KEY_D XK_d
-#  define KEY_R XK_r
-#  define KEY_SPACE XK_space
-#  define KEY_SHIFT XK_Shift_L
-#  define KEY_LEFT XK_Right
-#  define KEY_RIGHT XK_Left
-#  define KEY_UP XK_Down
-#  define KEY_DOWN XK_Up
+#  define KEY_ESC 0xff1b
+#  define KEY_W 0x0077
+#  define KEY_A 0x0061
+#  define KEY_S 0x0073
+#  define KEY_D 0x0064
+#  define KEY_R 0x0072
+#  define KEY_SPACE 0x0020
+#  define KEY_SHIFT 0xffe1
+#  define KEY_LEFT 0xff53
+#  define KEY_RIGHT 0xff51
+#  define KEY_UP 0xff54
+#  define KEY_DOWN 0xff52
 # endif
 
 # define MOVE_STEP 0.35
-# define ROT_STEP 0.0523598 // ~3 derece radyan
+# define ROT_STEP 0.0523598
 
 # include "camera.h"
 # include "objects.h"

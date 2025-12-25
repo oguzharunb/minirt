@@ -6,7 +6,7 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:19:27 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/25 13:06:43 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 14:16:02 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ static int	shade_pixel(t_scene *scene, t_ray *ray)
 
 void	render(t_app *app)
 {
-	int		x;
-	int		y;
+	t_ray_h	ray_h;
 	int		color;
 	t_ray	ray;
 	t_scene	*scene;
@@ -74,20 +73,21 @@ void	render(t_app *app)
 
 	scene = &app->scene;
 	img = &app->img;
-	y = 0;
-	while (y < scene->render_height)
+	ray_h.y = 0;
+	ray_h.height = scene->render_height;
+	ray_h.width = scene->render_width;
+	while (ray_h.y < scene->render_height)
 	{
-		x = 0;
-		while (x < scene->render_width)
+		ray_h.x = 0;
+		while (ray_h.x < scene->render_width)
 		{
-			set_ray(&ray, &scene->camera, x, y, scene->render_width,
-				scene->render_height);
+			set_ray(&ray, &scene->camera, ray_h);
 			color = shade_pixel(scene, &ray);
-			put_block(img, x * scene->scale, y * scene->scale, color,
-				scene->scale);
-			x++;
+			put_block(img, ray_h.x * scene->scale, ray_h.y * scene->scale,
+				color, scene->scale);
+			ray_h.x++;
 		}
 		mlx_put_image_to_window(app->mlx, app->win, img->img, 0, 0);
-		y++;
+		ray_h.y++;
 	}
 }

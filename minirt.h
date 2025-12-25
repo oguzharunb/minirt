@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objects.h                                          :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 00:49:11 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/24 13:18:20 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 15:29:43 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,6 @@ int			get_obj_color(t_hit *hit);
 int			is_in_shadow_scene(t_scene *scene, t_vec3 p, t_vec3 n,
 				t_vec3 l_pos);
 
+void		switch_to_low_res(t_scene *scene);
+void		switch_to_high_res(t_scene *scene);
 #endif

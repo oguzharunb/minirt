@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   hook_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/23 16:26:21 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/25 14:15:01 by msengul          ###   ########.fr       */
+/*   Created: 2025/12/25 13:53:18 by msengul           #+#    #+#             */
+/*   Updated: 2025/12/25 13:54:58 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#include "minirt.h"
 
-# include "camera.h"
-# include "vector.h"
-
-typedef struct s_ray
+void	switch_to_low_res(t_scene *scene)
 {
-	t_vec3	origin;
-	t_vec3	direction;
-}			t_ray;
+	if (scene->scale != 10)
+	{
+		scene->scale = 10;
+		scene->render_width = WIN_WIDTH / 10;
+		scene->render_height = WIN_HEIGHT / 10;
+	}
+}
 
-typedef struct s_ray_h
+void	switch_to_high_res(t_scene *scene)
 {
-	int		x;
-	int		y;
-	int		width;
-	int		height;
-}			t_ray_h;
-
-t_vec3		ray_at(t_ray *ray, double t);
-void		set_ray(t_ray *ray, t_camera *cam, t_ray_h pos);
-
-#endif
+	if (scene->scale != 1)
+	{
+		scene->scale = 1;
+		scene->render_width = WIN_WIDTH;
+		scene->render_height = WIN_HEIGHT;
+	}
+}

@@ -6,14 +6,12 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:24:51 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/24 15:28:12 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 13:59:55 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <math.h>
-
-#define ASPECT_RATIO (16.0 / 9.0)
 
 static void	setup_camera(t_camera *cam, double fov_deg)
 {
@@ -24,7 +22,7 @@ static void	setup_camera(t_camera *cam, double fov_deg)
 	theta = fov_deg * M_PI / 180.0;
 	h = tan(theta / 2.0);
 	cam->viewport_h = 2.0 * h;
-	cam->viewport_w = ASPECT_RATIO * cam->viewport_h;
+	cam->viewport_w = (16.0 / 9.0) * cam->viewport_h;
 	cam->forward = vec_normalize(cam->forward);
 	g_up = vec(0, 1, 0);
 	if (fabs(cam->forward.y) > 0.999)

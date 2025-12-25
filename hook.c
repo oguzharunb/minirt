@@ -6,32 +6,12 @@
 /*   By: msengul <msengul@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:08:30 by msengul           #+#    #+#             */
-/*   Updated: 2025/12/25 13:09:30 by msengul          ###   ########.fr       */
+/*   Updated: 2025/12/25 13:58:16 by msengul          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <math.h>
-
-static void	switch_to_low_res(t_scene *scene)
-{
-	if (scene->scale != 10)
-	{
-		scene->scale = 10;
-		scene->render_width = WIN_WIDTH / 10;
-		scene->render_height = WIN_HEIGHT / 10;
-	}
-}
-
-static void	switch_to_high_res(t_scene *scene)
-{
-	if (scene->scale != 1)
-	{
-		scene->scale = 1;
-		scene->render_width = WIN_WIDTH;
-		scene->render_height = WIN_HEIGHT;
-	}
-}
 
 static t_vec3	rot_axis(t_vec3 v, t_vec3 axis, double ang)
 {
@@ -126,9 +106,7 @@ int	on_key(int key, void *param)
 	if (key == KEY_W || key == KEY_S || key == KEY_D || key == KEY_A
 		|| key == KEY_SPACE || key == KEY_SHIFT || key == KEY_UP
 		|| key == KEY_DOWN || key == KEY_LEFT || key == KEY_RIGHT)
-	{
 		switch_to_low_res(&app->scene);
-	}
 	handle_move(key, &app->scene.camera, &changed);
 	handle_rotate(key, &app->scene.camera, &changed);
 	if (changed)

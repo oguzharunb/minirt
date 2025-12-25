@@ -82,7 +82,7 @@ typedef struct s_scene
 {
 	int					render_width;
 	int					render_height;
-
+	int					scale;
 	double				aspect_ratio;
 	t_camera			camera;
 	t_ambient			amb;

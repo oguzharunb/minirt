@@ -20,16 +20,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void	put_block(t_data *img, int sx, int sy, int color)
+static void put_block(t_data *img, int sx, int sy, int color, int scale)
 {
-	int	dx;
-	int	dy;
+	int dx;
+	int dy;
 
 	dy = 0;
-	while (dy < SCALE)
+	while (dy < scale)
 	{
 		dx = 0;
-		while (dx < SCALE)
+		while (dx < scale)
 		{
 			my_mlx_pixel_put(img, sx + dx, sy + dy, color);
 			dx++;
@@ -62,24 +62,27 @@ static int	shade_pixel(t_scene *scene, t_ray *ray)
 	return (lambert_shade(col, s));
 }
 
-void	render(t_data *img, t_scene *scene)
+// render.c dosyasında
+void render(t_data *img, t_scene *scene)
 {
-	int		x;
-	int		y;
-	int		color;
-	t_ray	ray;
+    int     x;
+    int     y;
+    int     color;
+    t_ray   ray;
 
-	y = 0;
-	while (y < scene->render_height)
-	{
-		x = 0;
-		while (x < scene->render_width)
-		{
-			set_ray(&ray, &scene->camera, x, y);
-			color = shade_pixel(scene, &ray);
-			put_block(img, x * SCALE, y * SCALE, color);
-			x++;
-		}
-		y++;
-	}
+    y = 0;
+    while (y < scene->render_height)
+    {
+        x = 0;
+        while (x < scene->render_width)
+        {
+            // GÜNCELLEME: scene->render_width ve height'i parametre olarak ekle
+            set_ray(&ray, &scene->camera, x, y, scene->render_width, scene->render_height);
+            
+            color = shade_pixel(scene, &ray);
+            put_block(img, x * scene->scale, y * scene->scale, color, scene->scale);
+            x++;
+        }
+        y++;
+    }
 }

@@ -23,6 +23,6 @@ typedef struct s_ray
 }			t_ray;
 
 t_vec3		ray_at(t_ray *ray, double t);
-t_ray		*set_ray(t_ray *ray, t_camera *cam, int i, int j);
+void set_ray(t_ray *ray, t_camera *cam, double x, double y, int width, int height);
 
 #endif

@@ -13,7 +13,11 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define SCALE 4
+// ARTIK BUNLAR SABİT PENCERE BOYUTUMUZ (1600x900)
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 900
+
+# define SCALE 10
 # define SCREEN_WIDTH 320
 # define SCREEN_HEIGHT 180
 
@@ -24,6 +28,7 @@
 #  define KEY_A XK_a
 #  define KEY_S XK_s
 #  define KEY_D XK_d
+#  define KEY_R XK_r
 #  define KEY_SPACE XK_space
 #  define KEY_SHIFT XK_Shift_L
 #  define KEY_LEFT XK_Right

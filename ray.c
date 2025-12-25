@@ -20,17 +20,25 @@ t_vec3	ray_at(t_ray *ray, double t)
 	return (vec_add(ray->origin, vec_mul(ray->direction, t)));
 }
 
-t_ray	*set_ray(t_ray *ray, t_camera *cam, int i, int j)
-{
-	double	u;
-	double	v;
-	t_vec3	p;
+/* ray.c dosyası */
 
-	u = (double)i / (SCREEN_WIDTH - 1);
-	v = 1.0 - (double)j / (SCREEN_HEIGHT - 1);
-	p = vec_add(vec_add(cam->lower_left, vec_mul(cam->horizontal, u)),
-			vec_mul(cam->vertical, v));
-	ray->origin = cam->origin;
-	ray->direction = vec_normalize(vec_sub(p, cam->origin));
-	return (ray);
+void set_ray(t_ray *ray, t_camera *cam, double x, double y, int width, int height)
+{
+    double u;
+    double v;
+
+    u = x / (double)width;
+    
+    // ESKİ HALİ (Ters Çeviren):
+    // v = y / (double)height;
+
+    // YENİ HALİ (DÜZELTME):
+    // Y değerini 1'den çıkartarak ters çeviriyoruz (Flip Vertical)
+    v = 1.0 - (y / (double)height);
+
+    ray->origin = cam->origin;
+    ray->direction = vec_sub(
+        vec_add(vec_add(cam->lower_left, vec_mul(cam->horizontal, u)),
+        vec_mul(cam->vertical, v)),
+        cam->origin);
 }
